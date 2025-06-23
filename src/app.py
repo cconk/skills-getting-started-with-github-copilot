@@ -21,63 +21,60 @@ app.mount("/static", StaticFiles(directory=os.path.join(Path(__file__).parent,
 
 # In-memory activity database
 activities = {
-    "Chess Club": {
-        "description": "Learn strategies and compete in chess tournaments",
-        "schedule": "Fridays, 3:30 PM - 5:00 PM",
-        "max_participants": 12,
-        "participants": ["michael@mergington.edu", "daniel@mergington.edu"]
-    },
-    "Programming Class": {
-        "description": "Learn programming fundamentals and build software projects",
-        "schedule": "Tuesdays and Thursdays, 3:30 PM - 4:30 PM",
-        "max_participants": 20,
-        "participants": ["emma@mergington.edu", "sophia@mergington.edu"]
-    },
-    "Gym Class": {
-        "description": "Physical education and sports activities",
-        "schedule": "Mondays, Wednesdays, Fridays, 2:00 PM - 3:00 PM",
-        "max_participants": 30,
-        "participants": ["john@mergington.edu", "olivia@mergington.edu"]
-    },
-    # Sports activities
-    "Soccer Team": {
-        "description": "Join the school soccer team and compete in local leagues",
-        "schedule": "Tuesdays and Thursdays, 4:00 PM - 5:30 PM",
-        "max_participants": 18,
-        "participants": ["lucas@mergington.edu", "mia@mergington.edu"]
-    },
-    "Basketball Club": {
-        "description": "Practice basketball skills and play friendly matches",
-        "schedule": "Wednesdays, 3:30 PM - 5:00 PM",
-        "max_participants": 15,
-        "participants": ["liam@mergington.edu", "ava@mergington.edu"]
-    },
-    # Artistic activities
-    "Art Club": {
-        "description": "Explore painting, drawing, and other visual arts",
-        "schedule": "Mondays, 3:30 PM - 5:00 PM",
-        "max_participants": 16,
-        "participants": ["ella@mergington.edu", "noah@mergington.edu"]
-    },
-    "Drama Society": {
-        "description": "Participate in school plays and drama workshops",
-        "schedule": "Thursdays, 4:00 PM - 5:30 PM",
-        "max_participants": 20,
-        "participants": ["amelia@mergington.edu", "jack@mergington.edu"]
-    },
-    # Intellectual activities
-    "Mathletes": {
-        "description": "Compete in math competitions and solve challenging problems",
-        "schedule": "Fridays, 2:00 PM - 3:30 PM",
-        "max_participants": 10,
-        "participants": ["ethan@mergington.edu", "isabella@mergington.edu"]
-    },
-    "Science Club": {
-        "description": "Conduct experiments and explore scientific concepts",
-        "schedule": "Wednesdays, 4:00 PM - 5:00 PM",
-        "max_participants": 14,
-        "participants": ["benjamin@mergington.edu", "charlotte@mergington.edu"]
-    }
+   "Chess Club": {
+      "description": "Learn strategies and compete in chess tournaments",
+      "schedule": "Fridays, 3:30 PM - 5:00 PM",
+      "max_participants": 12,
+      "participants": ["michael@mergington.edu", "daniel@mergington.edu"]
+   },
+   "Programming Class": {
+      "description": "Learn programming fundamentals and build software projects",
+      "schedule": "Tuesdays and Thursdays, 3:30 PM - 4:30 PM",
+      "max_participants": 20,
+      "participants": ["emma@mergington.edu", "sophia@mergington.edu"]
+   },
+   "Gym Class": {
+      "description": "Physical education and sports activities",
+      "schedule": "Mondays, Wednesdays, Fridays, 2:00 PM - 3:00 PM",
+      "max_participants": 30,
+      "participants": ["john@mergington.edu", "olivia@mergington.edu"]
+   },
+   "Basketball Team": {
+      "description": "Competitive basketball training and games",
+      "schedule": "Tuesdays and Thursdays, 4:00 PM - 6:00 PM",
+      "max_participants": 15,
+      "participants": []
+   },
+   "Swimming Club": {
+      "description": "Swimming training and water sports",
+      "schedule": "Mondays and Wednesdays, 3:30 PM - 5:00 PM",
+      "max_participants": 20,
+      "participants": []
+   },
+   "Art Studio": {
+      "description": "Express creativity through painting and drawing",
+      "schedule": "Wednesdays, 3:30 PM - 5:00 PM",
+      "max_participants": 15,
+      "participants": []
+   },
+   "Drama Club": {
+      "description": "Theater arts and performance training",
+      "schedule": "Tuesdays, 4:00 PM - 6:00 PM",
+      "max_participants": 25,
+      "participants": []
+   },
+   "Debate Team": {
+      "description": "Learn public speaking and argumentation skills",
+      "schedule": "Thursdays, 3:30 PM - 5:00 PM",
+      "max_participants": 16,
+      "participants": []
+   },
+   "Science Club": {
+      "description": "Hands-on experiments and scientific exploration",
+      "schedule": "Fridays, 3:30 PM - 5:00 PM",
+      "max_participants": 20,
+      "participants": []
+   }
 }
 
 
@@ -108,9 +105,4 @@ def signup_for_activity(activity_name: str, email: str):
     return {"message": f"Signed up {email} for {activity_name}"}
 
 
-@app.get("/activities/{activity_name}/participants")
-def get_activity_participants(activity_name: str):
-    """Get the list of participants for a specific activity"""
-    if activity_name not in activities:
-        raise HTTPException(status_code=404, detail="Activity not found")
-    return {"participants": activities[activity_name]["participants"]}
+
