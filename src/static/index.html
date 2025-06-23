@@ -19,6 +19,10 @@
           <!-- Activities will be loaded here -->
           <p>Loading activities...</p>
         </div>
+        <div id="participants-section" class="participants-section hidden">
+          <h4>Participants</h4>
+          <ul id="participants-list" class="participants-list"></ul>
+        </div>
         <div id="activities" class="activity-cards">
           <!-- Activity cards will be inserted here by app.js -->
         </div>
@@ -47,7 +51,32 @@
             // ...existing code...
             return card;
           }
-          // ...existing code...
+          function showParticipants(activityName) {
+            fetch(`/activities/${encodeURIComponent(activityName)}/participants`)
+              .then(res => res.json())
+              .then(data => {
+                const section = document.getElementById('participants-section');
+                const list = document.getElementById('participants-list');
+                list.innerHTML = '';
+                if (data.participants && data.participants.length > 0) {
+                  data.participants.forEach(p => {
+                    const li = document.createElement('li');
+                    li.textContent = p;
+                    list.appendChild(li);
+                  });
+                } else {
+                  const li = document.createElement('li');
+                  li.innerHTML = '<em>No participants yet</em>';
+                  list.appendChild(li);
+                }
+                section.classList.remove('hidden');
+              });
+          }
+          // Example: show participants for the first activity on load
+          document.addEventListener('DOMContentLoaded', () => {
+            const firstCard = document.querySelector('.activity-card h3');
+            if (firstCard) showParticipants(firstCard.textContent);
+          });
         </script>
         <style>
           /* ...existing code... */
